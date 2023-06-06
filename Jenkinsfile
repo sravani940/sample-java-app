@@ -20,13 +20,14 @@ pipeline {
    
         stage("build code"){
             steps{
+		sh 'cd webapp'
                 sh 'mvn clean install'
             }
             
         }
       stage('Deploy Build') {
          steps {
-             sh 'ansible-vault decrypt --vault-id /temp/pem-id ~/master.pem'
+             sh 'ansible-vault decrypt --vault-id /home/ubuntu/temp/vault-id /opt/jenkins/workspace/VisOps/t058/sample-java-app/deploy-on-tomcat/master.pem'
             sh "ansible-playbook -i inventory deploy-on-tomcat.yaml" 
          }
       }
