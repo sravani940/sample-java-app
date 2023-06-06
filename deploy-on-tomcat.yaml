@@ -1,6 +1,6 @@
 ---
 - name: Deploy Java Build in Tomcat server
-- hosts: tomcat
+  hosts: tomcat  # Specify the target host(s) here
   become: yes
   tasks:
     - name: 'Deploy Java Build in Tomcat server'
@@ -8,7 +8,6 @@
         dest: '/opt/tomcat10/webapps/ROOT.war'
         src: '/opt/jenkins/workspace/VisOps/t058/sample-java-app/deploy-on-tomcat/webapp/target/webapp.war'
         mode: 0755
-
 
     - name: Stop Tomcat service
       service:
@@ -20,8 +19,8 @@
         path: /opt/tomcat10/webapps/ROOT
         state: absent
 
-    - name: 'start Tomcat service'
+    - name: 'Restart Tomcat server'
       service:
         name: 'tomcat'
-        state: started
+        state: restarted
 
