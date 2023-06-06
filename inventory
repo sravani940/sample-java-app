@@ -1,0 +1,13 @@
+; -*-mode: ansible; coding: utf-8;-*-
+
+
+[tomcat]
+
+tomcat-server     ansible_host=44.200.153.243     ansible_port=22     ansible_user=ubuntu     ansible_ssh_private_key_file="/home/ubuntu/master.pem"
+
+
+[all:vars]
+ansible_ssh_pipelining=no
+
+
+

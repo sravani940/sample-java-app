@@ -1,0 +1,14 @@
+- hosts: webservers
+  become: yes
+  tasks:
+    - name: 'Deploy Java Build in Tomcat server'
+      copy:
+        dest: '/opt/tomcat10/webapps/ROOT.war'
+        src: '../hello-world/webapp/target/webapp.war'
+        mode: 0755
+
+    - name: 'Restart Tomcat server'
+      service:
+        name: 'tomcat'
+        state: restarted
+
