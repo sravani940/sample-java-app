@@ -1,4 +1,4 @@
-- hosts: webservers
+- hosts: tomcat
   become: yes
   tasks:
     - name: 'Deploy Java Build in Tomcat server'
