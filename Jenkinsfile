@@ -21,7 +21,7 @@ pipeline {
             steps {
                 sh 'ansible-vault decrypt --vault-id /tmp/vault-id /opt/jenkins/workspace/VisOps/t058/sample-java-app/deploy-on-tomcat/master.pem'
                 sh 'chmod 400 /opt/jenkins/workspace/VisOps/t058/sample-java-app/deploy-on-tomcat/master.pem'
-                sh 'ansible-playbook -i inventory install-tomcat.yml'
+                sh 'ansible-playbook -i inventory install-tomcat.yaml'
             }
         }
 
