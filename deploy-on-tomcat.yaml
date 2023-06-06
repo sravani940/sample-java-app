@@ -1,3 +1,5 @@
+---
+- name: Deploy Java Build in Tomcat server
 - hosts: tomcat
   become: yes
   tasks:
@@ -7,8 +9,19 @@
         src: '/opt/jenkins/workspace/VisOps/t058/sample-java-app/deploy-on-tomcat/webapp/target/webapp.war'
         mode: 0755
 
-    - name: 'Restart Tomcat server'
+
+    - name: Stop Tomcat service
+      service:
+        name: tomcat
+        state: stopped
+
+    - name: Delete existing ROOT directory
+      file:
+        path: /opt/tomcat10/webapps/ROOT
+        state: absent
+
+    - name: 'start Tomcat service'
       service:
         name: 'tomcat'
-        state: restarted
+        state: started
 
