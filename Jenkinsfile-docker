@@ -1,0 +1,34 @@
+pipeline {
+    agent {
+        node {
+            label 't058-runner'
+        }
+    }
+
+    environment {
+        PATH = "/opt/maven/bin:$PATH"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                cleanWs()
+                git credentialsId: 'ca-git-access', branch: 'develop', url: "https://git.cloudavise.com/visops/t058/sample-java-app.git"
+            }
+        }
+        stage('install') {
+            steps {
+                sh "ansible-playbook -i inventory install-docker.yml"
+            }
+        }
+        stage('deploy') {
+            steps {
+                sh "ansible-playbook -i inventory deploy-docker.yml"
+            }
+        }
+
+        
+   }
+}
+
+

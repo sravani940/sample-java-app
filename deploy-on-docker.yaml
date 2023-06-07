@@ -1,0 +1,22 @@
+---
+- name: Build Docker image and run container
+  hosts: tomcat
+  become: yes
+
+  tasks:
+    - name: Copy Dockerfile
+      copy:
+        src: Dockerfile
+        dest: /home/ubuntu
+
+    - name: Copy WAR file
+      copy:
+        src: /opt/jenkins/workspace/VisOps/t058/sample-java-app/deploy-on-tomcat/webapp/target/webapp.war
+        dest: /home/ubuntu
+
+    - name: Build Docker image
+      command: docker build -t tomcat:v1 /home/ubuntu/.
+
+    - name: Run Docker container
+      command: docker run -it -d -p 8001:8080 tomcat:v1
+
