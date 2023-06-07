@@ -27,7 +27,7 @@ pipeline {
 
         stage('deploy') {
             steps {
-                  sh 'ansible-vault decrypt --vault-id /tmp/vault-id /opt/jenkins/workspace/VisOps/t058/sample-java-app/deploy-on-tomcat/master.pem'
+                  sh 'ansible-vault decrypt --vault-id /tmp/vault-id /opt/jenkins/workspace/VisOps/t058/sample-java-app/deploy-on-docker/master.pem'
                 sh "ansible-playbook -i inventory deploy-docker.yaml"
             }
         }
