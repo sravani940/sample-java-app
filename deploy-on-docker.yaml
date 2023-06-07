@@ -18,5 +18,5 @@
       command: docker build -t tomcat:v1 /home/ubuntu/.
 
     - name: Run Docker container
-      command: docker run -it -d -p 8001:8080 tomcat:v1
+      command: docker run -d -p 8001:80 tomcat:v1
 
